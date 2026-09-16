@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Os Impactos da Tecnologia no Cérebro Humano</title>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: #0c0e1f;
+    color: #edeffb;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3 {
+    font-family: Georgia, serif;
+  }
+
+  .barra-lateral {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 210px;
+    height: 100%;       
+    background-color: #12142a;
+    border-right: 1px solid #2b2f56;
+    padding: 24px 0;
+    overflow-y: auto;     
+  }
+
+  .barra-lateral .logo {
+    display: block;
+    width: 90px;
+    height: 90px;
+    margin: 4px auto 14px auto;
+    padding: 12px;
+    background-color: rgba(127, 168, 255, 0.15);
+    border: 1px solid rgba(127, 168, 255, 0.3);
+    border-radius: 16px;                         
+    object-fit: contain;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    opacity: 0.95;
+  }
+
+  .barra-lateral .marca {
+    padding: 0 20px 20px 20px;
+    font-size: 13px;
+    color: #9aa0c7;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: center;
+    border-bottom: 1px solid #2b2f56;
+    margin-bottom: 10px;
+  }
+
+  .barra-lateral a {
+    display: block;
+    padding: 10px 20px;
+    color: #edeffb;
+    font-size: 14px;
+    border-left: 3px solid transparent;
+  }
+
+  .barra-lateral a:hover {
+    background-color: #1a1d3a;
+    border-left-color: #7fa8ff;
+    text-decoration: none;
+  }
+
+  .barra-lateral .grupo-titulo {
+    padding: 18px 20px 6px 20px;
+    font-size: 12px;
+    color: #7fa8ff;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .barra-lateral a.negativo:hover { border-left-color: #ff6fa8; }
+  .barra-lateral a.positivo:hover { border-left-color: #7fe0c4; }
+
+  .conteudo {
+    margin-left: 210px;
+  }
+
+  #capa {
+    padding: 60px 40px;
+    text-align: center;
+  }
+
+  #capa h1 {
+    font-size: 40px;
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+
+  #capa .destaque {
+    color: #7fa8ff;
+  }
+
+  #capa p {
+    max-width: 600px;
+    margin: 0 auto;
+    color: #9aa0c7;
+  }
+
+  #capa .info {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #9aa0c7;
+  }
+
+  .secao {
+    padding: 50px 40px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .secao h2 {
+    font-size: 28px;
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+
+  .secao p {
+    color: #9aa0c7;
+    margin-bottom: 16px;
+  }
+
+  .fundo-alternado {
+    background-color: #12142a;
+  }
+
+  .topico {
+    border-left: 4px solid #7fa8ff;
+    padding-left: 20px;
+    margin-bottom: 40px;
+  }
+
+  .topico.negativo {
+    border-left-color: #ff6fa8;
+  }
+
+  .topico.positivo {
+    border-left-color: #7fe0c4;
+  }
+
+  .topico .numero {
+    color: #ffb86b;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .topico h3 {
+    font-size: 20px;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+
+  .topico .fonte {
+    font-size: 13px;
+    color: #7fa8ff;
+  }
+
+  .bloco-curiosidade, .selo-midia {
+    background-color: #1a1d3a;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 25px 0;
+    border-left: 4px solid #ffb86b;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .selo-midia {
+    border-left-color: #7fe0c4;
+  }
+
+  .tag-curiosidade, .tag-midia {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+
+  .tag-curiosidade {
+    background-color: rgba(255, 184, 107, 0.15);
+    color: #ffb86b;
+  }
+
+  .tag-midia {
+    background-color: rgba(127, 224, 196, 0.15);
+    color: #7fe0c4;
+  }
+
+  .bloco-curiosidade p, .selo-midia p {
+    margin: 0;
+    color: #edeffb;
+    font-size: 14.5px;
+    line-height: 1.5;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+
+  th, td {
+    border: 1px solid #2b2f56;
+    padding: 12px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #1a1d3a;
+    color: #ffffff;
+  }
+
+  td {
+    color: #9aa0c7;
+  }
+
+  #rodape {
+    text-align: center;
+    padding: 30px 40px;
+    color: #9aa0c7;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  a {
+    color: #7fa8ff;
+    text-decoration: none;
+    transition: color 0.2s ease, text-decoration 0.2s ease;
+  }
+
+  a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+
+  .botao-link {
+    display: inline-block;
+    margin: 30px auto;
+    padding: 12px 24px;
+    background-color: #1a1d3a;
+    color: #7fa8ff;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #2b2f56;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .botao-link:hover {
+    background-color: #7fa8ff;
+    color: #0c0e1f;
+    border-color: #7fa8ff;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(127, 168, 255, 0.3);
+  }
+
+  .container-centralizado {
+    text-align: center;
+    width: 100%;
+  }
+
+  @media (max-width: 800px) {
+    .barra-lateral {
+      position: static;
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .conteudo {
+      margin-left: 0;
+    }
+
+    .barra-lateral .marca,
+    .barra-lateral .grupo-titulo {
+      width: 100%;
+    }
+
+    #capa h1 {
+      font-size: 28px;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div class="barra-lateral">
+    <img class="logo" src="logo.png" alt="Logo — cérebro e tecnologia">
+    <div class="marca"></div>
+    <a href="#capa">Capa</a>
+    <a href="#introducao">Introdução</a>
+
+    <div class="grupo-titulo">Fundamentação teórica</div>
+    <a href="#topico-2-1">2.1 Sociedade e tecnologia</a>
+    <a href="#topico-2-2">2.2 O cérebro humano</a>
+    <a class="negativo" href="#topico-2-3">2.3 Atenção e concentração</a>
+    <a class="negativo" href="#topico-2-4">2.4 Memória</a>
+    <a class="negativo" href="#topico-2-5">2.5 Dopamina</a>
+    <a class="positivo" href="#topico-2-6">2.6 Impactos positivos</a>
+    <a class="negativo" href="#topico-2-7">2.7 Impactos negativos</a>
+    <a class="positivo" href="#topico-2-8">2.8 Uso equilibrado</a>
+
+    <div class="grupo-titulo">Encerramento</div>
+    <a href="#dados">Dados em números</a>
+    <a href="#sintese">Síntese</a>
+    <a href="site_referencias.html">Referências</a>
+  </div>
+
+  <div class="conteudo">
+
+    <div id="capa">
+      <h1>Os impactos da <span class="destaque">tecnologia</span> no cérebro humano</h1>
+      <p>Uma investigação sobre como o uso contínuo de dispositivos móveis afeta a atenção, a memória e os circuitos de recompensa do cérebro humano.</p>
+      <div class="info"></div>
+    </div>
+
+    <div id="introducao" class="secao fundo-alternado">
+      <h2>A pergunta que guia esta pesquisa</h2>
+      <p>O avanço tecnológico transformou a comunicação, a educação, o trabalho e a interação social. A internet e os smartphones deslocaram a vida humana do encontro presencial para uma experiência mediada, quase constante, pelo ambiente digital.</p>
+      <p><strong>Como o uso contínuo e prolongado de dispositivos móveis afeta a base biológica e o comportamento dos indivíduos?</strong> Um ecossistema controlado por algoritmos e por fluxos ininterruptos de informação atinge diretamente a estrutura cerebral, fragmenta a atenção e altera os mecanismos de recompensa — com efeitos sobre o sono, a memória e a capacidade de concentração.</p>
+      <p>O tema se justifica pela urgência de compreender a neuroplasticidade e os mecanismos adaptativos da mente diante do uso excessivo de telas. Para isso, o trabalho segue uma revisão bibliográfica de autores de referência da neurociência e da sociologia da era digital.</p>
+    </div>
+
+    <div id="fundamentacao" class="secao">
+      <h2>Fundamentação teórica</h2>
+
+      <div id="topico-2-1" class="topico">
+        <div class="numero">2.1</div>
+        <h3>Tecnologia e sociedade atual</h3>
+        <p>A evolução tecnológica promoveu transformações profundas na comunicação, educação, trabalho, saúde e interação social. Ao mesmo tempo, trouxe desafios como desinformação, riscos à privacidade, exclusão digital e impactos na saúde mental — muitas vezes porque a velocidade das inovações supera a capacidade da sociedade de se adaptar eticamente e juridicamente a elas.</p>
+        <p>A revolução digital começou entre 1950 e 1970: dos computadores militares aos primeiros usos domésticos, passando pela popularização dos celulares e da internet nos anos 90 e chegando aos smartphones e à internet portátil de hoje.</p>
+        <p>Manuel Castells descreve a sociedade atual como uma "sociedade em rede": um conjunto de nós interconectados — mercados, mídias, pessoas — onde o "poder dos fluxos" pesa mais do que os interesses locais, e quem detém o acesso à informação detém o poder econômico.</p>
+        <div class="fonte">RODRIGUES, 2023 · ROCHA; NAKAMOTO, 2023 · SCHWAB, 2016 · NASCIMENTO, 2020 · CASTELLS, 2022</div>
+      </div>
+
+      <div id="topico-2-2" class="topico">
+        <div class="numero">2.2</div>
+        <h3>Funcionamento básico do cérebro humano</h3>
+        <p>O cérebro reúne bilhões de neurônios que se comunicam por meio de dendritos, axônios e sinapses, liberando neurotransmissores. O córtex cerebral se divide em quatro lobos — frontal (estratégia e movimento), parietal (sensações), occipital (visão) e temporal (audição e memória).</p>
+        <p>A neuroplasticidade — a capacidade dos neurônios de se modificarem diante de estímulos externos — se manifesta de formas regenerativa, axônica, sináptica, dendrítica e somática. É mais intensa durante o desenvolvimento, mas persiste, em menor grau, na vida adulta. Nem sempre essa adaptação é positiva: ela também pode favorecer condições mal-adaptativas.</p>
+        <div class="fonte">LENT, 2010 · BEAR; CONNORS; PARADISO, 2020 · DUMARESQ, 2021 · KANDEL et al., 2021</div>
+      </div>
+
+      <div id="topico-2-3" class="topico negativo">
+        <div class="numero">2.3</div>
+        <h3>Influência da tecnologia na atenção e concentração</h3>
+        <p>O smartphone foi desenhado para modificar comportamentos por meio de algoritmos que rastreiam, comparam e correlacionam dados pessoais em escala — um "modificador de comportamento permanente de grande escala".</p>
+        <p>O tempo de tela cresce ao longo da infância e adolescência, chegando a cerca de 7h30 por dia entre os 13 e 18 anos. Pesquisas recentes mostram que cada hora diária de tela no início do ensino fundamental aumenta em cerca de 50% a chance de distúrbios de atenção, e que jovens que usam smartphone têm quase três vezes mais chance de apresentar déficits de atenção do que quem não usa.</p>
+        
+        <div class="bloco-curiosidade">
+          <span class="tag-curiosidade">💡 Você Sabia? — Síndrome da Vibração Fantasma</span>
+          <p>Cerca de 89% dos usuários de smartphones relatam sentir o celular vibrar no bolso mesmo sem nenhuma notificação. O cérebro mal-interpreta pequenos espasmos musculares devido à ansiedade contínua por novos estímulos.</p>
+        </div>
+
+        <div class="fonte">BATALHA; SILVA; VELASQUEZ, 2025 · LANIER, 2018 · DESMURGET, 2021 · MEIRELES et al., 2024 · DAMASCENO et al., 2024 · SILVA; SILVA; ALMEIDA, 2025</div>
+      </div>
+
+      <div id="topico-2-4" class="topico negativo">
+        <div class="numero">2.4</div>
+        <h3>Tecnologia e memória</h3>
+        <p>A busca instantânea por respostas reduz a necessidade percebida de memorizar. Passamos a ler de forma superficial, pulando frases em busca do que interessa imediatamente. O sono é decisivo para a memória: é durante o sono profundo que ela se consolida, não durante a leitura — sem descanso adequado, o aprendizado do dia fica raso.</p>
+        <p>Desmurget chama a internet de "memória de silício": ao terceirizá-la, esvaziamos a base de conhecimento interna necessária para pensamentos complexos e críticos. As multitarefas digitais reforçam esse quadro, mantendo o cérebro em estado de interrupção contínua.</p>
+        
+        <div class="bloco-curiosidade">
+          <span class="tag-curiosidade">💡 Você Sabia? — Amnésia Digital</span>
+          <p>Quando o cérebro sabe que uma informação está salva e acessível a um clique, ele prioriza memorizar <em>onde</em> encontrar o dado em vez do conteúdo em si. É o chamado "Efeito Google".</p>
+        </div>
+
+        <div class="fonte">CARR, 2011 · DESMURGET, 2021 · MENEZES; CASTILHO; SOUZA, 2025</div>
+      </div>
+
+      <div id="topico-2-5" class="topico negativo">
+        <div class="numero">2.5</div>
+        <h3>Redes sociais e dopamina</h3>
+        <p>Prazer e dor são processados por circuitos sobrepostos que funcionam como uma balança. Rolar o feed libera dopamina; para reequilibrar, o cérebro produz um efeito oposto — o vazio ou a irritação sentidos ao largar o telefone. A hiperestimulação constante pode levar a um estado crônico de déficit de dopamina, ansiedade e depressão.</p>
+        <p>O cérebro humano ainda opera com mecanismos de sobrevivência antigos, não adaptados à velocidade digital, e o estilo de vida sedentário imposto pelas telas priva o corpo do movimento essencial para a saúde mental. Ainda assim, os efeitos dependem de como a tecnologia é usada — usada com consciência, ela também pode ampliar capacidades cognitivas.</p>
+        
+        <div class="bloco-curiosidade">
+          <span class="tag-curiosidade">💡 Você Sabia? — O "Efeito Caça-Níveis"</span>
+          <p>O gesto de deslizar a tela para baixo para atualizar o feed foi desenhado usando a mesma lógica psicológica das máquinas caça-níqueis de cassino: a recompensa imprevisível libera picos muito maiores de dopamina.</p>
+        </div>
+
+        <div class="fonte">LEMBKE, 2021 · HANSEN, 2024 · NAHAS, 2017 · LÉVY, 1999 · WOLF, 2021</div>
+      </div>
+
+      <div id="topico-2-6" class="topico positivo">
+        <div class="numero">2.6</div>
+        <h3>Impactos positivos da tecnologia no cérebro</h3>
+        <p>O método CODE — Capturar, Organizar, Destilar, Expressar — descreve como um "segundo cérebro" digital pode aliviar a sobrecarga cognitiva, liberando espaço mental para criar em vez de apenas memorizar.</p>
+        <p>O cérebro se reinventa diante de cada nova ferramenta, assim como aprendemos a ler, também aprendemos a navegar o ambiente digital. A natureza multimodal da internet — imagem, som e texto combinados — pode estimular o cérebro a processar grandes volumes de informação de formas que a leitura tradicional não alcança. Ainda assim, o uso excessivo pode comprometer concentração, memória e equilíbrio emocional — os benefícios dependem do uso consciente.</p>
+        <div class="fonte">FORTE, 2022 · WOLF, 2021 · LEMBKE, 2021</div>
+      </div>
+
+      <div id="topico-2-7" class="topico negativo">
+        <div class="numero">2.7</div>
+        <h3>Impactos negativos do uso excessivo da tecnologia</h3>
+        <p>Entre 2010 e 2015 ocorreu uma "grande reconfiguração" da infância: brincadeiras físicas e interações presenciais deram lugar a uma infância mediada por telas, sedentária e guiada por algoritmos — justamente quando o cérebro mais precisa desses estímulos para o córtex pré-frontal amadurecer.</p>
+        <p>Quatro danos cognitivos se destacam: privação social, privação do sono, fragmentação da atenção por notificações constantes ("atenção parcial contínua") e dependência comportamental, comparável ao ciclo de reforço de máquinas caça-níqueis. A "armadilha da comparação social ascendente" — comparar a própria vida real com versões editadas dos outros — ainda alimenta ansiedade crônica e sensação de inadequação.</p>
+        
+        <div class="selo-midia">
+          <span class="tag-midia">📰 Na Mídia — Recuo Digital Escolar</span>
+          <p>Países como França e Suécia voltaram a priorizar livros didáticos impressos e caneta nas salas de aula após pesquisas mostrarem queda na capacidade de leitura e retenção de estudantes hiperconectados a tablets.</p>
+        </div>
+
+        <div class="fonte">HAIDT, 2024 · KENSKI, 2012</div>
+      </div>
+
+      <div id="topico-2-8" class="topico positivo">
+        <div class="numero">2.8</div>
+        <h3>Uso equilibrado da tecnologia</h3>
+        <p>O minimalismo digital propõe não a abstinência total, mas a troca do lazer passivo por atividades de alta qualidade — criar, consertar, mover o corpo. A "faxina digital" sugere trinta dias sem tecnologias opcionais, seguidos da reintrodução consciente apenas do que realmente agrega valor.</p>
+        <p>A solidão — os momentos sem estímulo algum — é essencial para processar informações e manter a saúde mental. Combater a privação da solidão e estabelecer regras claras de uso é um caminho para recuperar a autonomia intelectual e reduzir a ansiedade crônica da hiperconectividade.</p>
+        
+        <div class="selo-midia">
+          <span class="tag-midia">📰 Na Mídia — O "Hack" da Escala de Cinza</span>
+          <p>Mudar as configurações da tela do celular para preto e branco reduz drasticamente o tempo de uso diário. Sem as cores chamativas projetadas pelos aplicativos, o cérebro perde o interesse visual rapidamente.</p>
+        </div>
+
+        <div class="fonte">NEWPORT, 2021 · KENSKI, 2012 · SANTAELLA, 2013</div>
+      </div>
+
+    </div>
+
+    <div id="dados" class="secao fundo-alternado">
+      <h2>O tempo de tela em números</h2>
+      <p>A exposição às telas cresce a cada faixa etária, e o total acumulado ao longo de um ano é bastante alto.</p>
+      <table>
+        <tr>
+          <th>Fase escolar</th>
+          <th>Tempo por dia</th>
+          <th>Total no ano</th>
+          <th>% do dia</th>
+        </tr>
+        <tr>
+          <td>Pré-escola (a partir de 2 anos)</td>
+          <td>50 min</td>
+          <td>1.000 horas</td>
+          <td>20%</td>
+        </tr>
+        <tr>
+          <td>Educação infantil (2 a 8 anos)</td>
+          <td>2h30</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Ensino fundamental (8 a 12 anos)</td>
+          <td>4h30</td>
+          <td>1.700 horas</td>
+          <td>32%</td>
+        </tr>
+        <tr>
+          <td>Ensino médio (13 a 18 anos)</td>
+          <td>7h30</td>
+          <td>2.650 horas</td>
+          <td>45%</td>
+        </tr>
+      </table>
+      <p style="font-size: 13px; margin-top: 15px;">Fonte: DESMURGET, 2021 · DAMASCENO et al., 2024 · MEIRELES et al., 2024. A correspondência entre faixa etária e fase escolar é aproximada, seguindo a ordem apresentada no TCC.</p>
+    </div>
+
+    <div id="sintese" class="secao">
+      <h2>O cérebro não é contra a tecnologia — ele só precisa de equilíbrio</h2>
+      <p>Entre o alívio cognitivo de um "segundo cérebro" digital e a fragmentação da atenção por notificações constantes, a diferença não está na ferramenta, mas no uso consciente que fazemos dela — e no espaço que ainda reservamos para o sono, o corpo e a solidão produtiva.</p>
+    </div>
+
+    <div class="container-centralizado">
+      <a href="site_referencias.html" class="botao-link">Ver referências bibliográficas →</a>
+    </div>
+
+    <div id="rodape">
+      Murilo Antônio Corrêa Fernandes<br>
+      Técnico em Informática Integrado ao Ensino Médio<br>
+      E. E. E. M. Profª. Maria Rocha — 2026
+    </div>
+
+  </div>
+
+</body>
+</html>
