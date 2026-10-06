@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hiperconexão — O Cérebro na Era Digital</title>
+  <style>
+    :root {
+      --bg-dark: #080a14;
+      --bg-card: #101428;
+      --border-color: #1e2448;
+      --accent-blue: #7fa8ff;
+      --accent-cyan: #00f2fe;
+      --accent-pink: #ff6fa8;
+      --accent-green: #7fe0c4;
+      --text-main: #e8eaf6;
+      --text-sub: #9aa0c7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(8, 10, 20, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: Georgia, serif;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--text-main);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-links a {
+      color: var(--text-sub);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-cyan);
+    }
+
+    .container {
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      width: 100%;
+      flex: 1;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 40px 20px;
+      background: radial-gradient(circle at top, #161c3d 0%, var(--bg-dark) 70%);
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 40px;
+    }
+
+    .hero h1 {
+      font-family: Georgia, serif;
+      font-size: 2.2rem;
+      line-height: 1.2;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 .highlight {
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--text-sub);
+      max-width: 650px;
+      margin: 0 auto 25px;
+      font-size: 0.95rem;
+    }
+
+    .quiz-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 550px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .quiz-box h3 {
+      font-size: 0.9rem;
+      color: var(--accent-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .quiz-btn {
+      background: #181d3a;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 10px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      font-size: 0.88rem;
+      transition: all 0.2s;
+    }
+
+    .quiz-btn:hover {
+      border-color: var(--accent-cyan);
+      background: #20274e;
+    }
+
+    .quiz-resultado {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 8px;
+      background: rgba(0, 242, 254, 0.08);
+      border: 1px solid var(--accent-cyan);
+      color: var(--text-main);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    #topicos-anchor {
+      scroll-margin-top: 80px;
+    }
+
+    .section-title {
+      font-family: Georgia, serif;
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-subtitle {
+      color: var(--text-sub);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    .dica-scroll-mobile {
+      display: none;
+      font-size: 0.8rem;
+      color: var(--accent-blue);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    .grid-topicos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 18px;
+      margin-bottom: 50px;
+    }
+
+    .card-topico {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .card-topico:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-blue);
+      box-shadow: 0 8px 24px rgba(127, 168, 255, 0.12);
+    }
+
+    .card-topico .badge {
+      display: inline-block;
+      align-self: flex-start;
+      background: #181c38;
+      color: var(--accent-blue);
+      font-weight: bold;
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    .card-topico h3 {
+      font-family: Georgia, serif;
+      font-size: 1.15rem;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .card-topico p {
+      color: var(--text-sub);
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+    }
+
+    .card-topico .link-acao {
+      color: var(--accent-cyan);
+      font-size: 0.82rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    #ferramenta-foco {
+      scroll-margin-top: 80px;
+    }
+
+    .calc-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 50px;
+    }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 15px;
+    }
+
+    .calc-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .calc-input-group + .calc-input-group {
+      margin-top: 18px;
+    }
+
+    .calc-input-group label {
+      font-size: 0.85rem;
+      color: var(--text-sub);
+    }
+
+    .calc-input-group input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent-cyan);
+    }
+
+    .calc-val {
+      font-weight: bold;
+      color: var(--accent-cyan);
+      font-size: 0.9rem;
+    }
+
+    .calc-result-box {
+      background: #161a36;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .calc-score {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--accent-pink);
+    }
+
+    .view-detalhe {
+      display: none;
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .botao-voltar {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #181d3a;
+      color: var(--accent-blue);
+      border: 1px solid var(--border-color);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: all 0.2s ease;
+    }
+
+    .botao-voltar:hover {
+      background: var(--accent-blue);
+      color: var(--bg-dark);
+    }
+
+    .card-conteudo {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-conteudo .header-topico {
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+
+    .card-conteudo .tag-num {
+      color: var(--accent-blue);
+      font-weight: bold;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    .card-conteudo h2 {
+      font-family: Georgia, serif;
+      font-size: 1.8rem;
+      color: #fff;
+      margin-top: 5px;
+    }
+
+    .card-conteudo .texto {
+      font-size: 0.98rem;
+      color: var(--text-main);
+      margin-bottom: 25px;
+    }
+
+    .card-conteudo .texto p {
+      margin-bottom: 15px;
+    }
+
+    .card-conteudo .texto ul {
+      margin-bottom: 15px;
+      padding-left: 20px;
+    }
+
+    .card-conteudo .texto li {
+      margin-bottom: 8px;
+    }
+
+    .area-imagem {
+      margin: 25px 0;
+      border-radius: 12px;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      padding: 15px;
+      text-align: center;
+    }
+
+    .area-imagem svg {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .legenda-imagem {
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: var(--text-sub);
+      text-align: center;
+      font-style: italic;
+    }
+
+    .fonte-citacao {
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.8rem;
+      color: var(--accent-blue);
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 1.6rem; }
+      .dica-scroll-mobile { display: block; }
+
+      .grid-topicos {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 14px;
+        padding-bottom: 15px;
+      }
+
+      .card-topico {
+        flex: 0 0 85%;
+        scroll-snap-align: center;
+        min-height: 210px;
+      }
+
+      .calc-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links { display: none; }
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-sub);
+      font-size: 0.85rem;
+      background: #05060d;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Os impactos da tecnologia no cérebro humano</div>
+    <div class="nav-links">
+      <a href="#topicos-anchor" onclick="voltarAoMenu()">Módulos</a>
+      <a href="#ferramenta-foco" onclick="voltarAoMenu()">Calculadora de Foco</a>
+      <a href="#topicos-anchor" onclick="abrirTopico('ref')">Referências</a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <main id="view-grid">
+      
+      <section class="hero">
+        <h1>Como a <span class="highlight">tecnologia</span> está reconfigurando seu cérebro?</h1>
+        <p>Uma análise fundamentada em neurociência sobre foco, dopamina, ritmo circadiano e o uso consciente de ferramentas digitais.</p>
+        
+        <div class="quiz-box">
+          <h3>Autoavaliação Rápida:</h3>
+          <p style="font-size:0.85rem; color:#edeffb; margin-bottom:12px;">Com que frequência você olha o celular sem ter um motivo específico?</p>
+          <div class="quiz-options">
+            <button class="quiz-btn" onclick="responderQuiz('baixo')">Raramente — Apenas quando recebo avisos ou mensagens importantes.</button>
+            <button class="quiz-btn" onclick="responderQuiz('medio')">Às vezes — Várias vezes por hora ao longo do dia.</button>
+            <button class="quiz-btn" onclick="responderQuiz('alto')">Constantemente — É um impulso automático a cada poucos minutos.</button>
+          </div>
+          <div id="quiz-resultado" class="quiz-resultado"></div>
+        </div>
+      </section>
+
+      <section id="topicos-anchor">
+        <h2 class="section-title">Módulos de Estudo</h2>
+        <p class="section-subtitle">Clique em um dos cartões abaixo para abrir a análise teórica e os esquemas visuais.</p>
+        
+        <div class="dica-scroll-mobile">← Deslize lateralmente para explorar os tópicos →</div>
+        
+        <div class="grid-topicos">
+
+          <div class="card-topico" onclick="abrirTopico('2.1')">
+            <div>
+              <span class="badge">Tópico 2.1</span>
+              <h3>Estímulos Digitais & Dopamina</h3>
+              <p>O circuito de recompensa, notificações imprevisíveis e a balança dopaminérgica.</p>
+            </div>
+            <span class="link-acao">Explorar módulo →</span>
+          </div>
+
+          <div class="card-topico" onclick="abrirTopico('2.2')">
+            <div>
+              <span class="badge">Tópico 2.2</span>
+              <h3>Atenção Fragmentada & Multitarefa</h3>
+              <p>O custo cognitivo do alternar contínuo de tarefas (task-switching).</p>
+            </div>
+            <span class="link-acao">Explorar módulo →</span>
+          </div>
+
+          <div class="card-topico" onclick="abrirTopico('2.3')">
+            <div>
+              <span class="badge">Tópico 2.3</span>
+              <h3>Memória & Leitura Profunda</h3>
+              <p>Efeito Google, amnésia digital e o funil de consolidação da memória.</p>
+            </div>
+            <span class="link-acao">Explorar módulo →</span>
+          </div>
+
+          <div class="card-topico" onclick="abrirTopico('2.4')">
+            <div>
+              <span class="badge">Tópico 2.4</span>
+              <h3>Sono & Ritmo Circadiano</h3>
+              <p>Ação da luz azul na supressão de melatonina e reparação celular.</p>
+            </div>
+            <span class="link-acao">Explorar módulo →</span>
+          </div>
+
+          <div class="card-topico" onclick="abrirTopico('2.5')">
+            <div>
+              <span class="badge">Tópico 2.5</span>
+              <h3>Tecnoestresse & Cortisol</h3>
+              <p>A hipertensão digital, síndrome de FOMO e ansiedade por conexão.</p>
+            </div>
+            <span class="link-acao">Explorar módulo →</span>
+          </div>
+
+          <div class="card-topico" onclick="abrirTopico('2.6')">
+            <div>
+              <span class="badge">Tópico 2.6</span>
+              <h3>Uso Consciente & Método C.O.D.E.</h3>
+              <p>Como construir um 'Segundo Cérebro' para exteriorizar dados.</p>
+            </div>
+            <span class="link-acao">Explorar módulo →</span>
+          </div>
+
+          <div class="card-topico" onclick="abrirTopico('2.7')">
+            <div>
+              <span class="badge" style="background:#2d1738; color:var(--accent-pink); border-color:#522363;">Estatísticas</span>
+              <h3>Tempo de Tela em Números</h3>
+              <p>Comparativo percentual entre o limite recomendado pelas diretrizes de saúde e a média real de uso.</p>
+            </div>
+            <span class="link-acao" style="color:var(--accent-pink)">Ver dados em gráfico →</span>
+          </div>
+
+          <div class="card-topico" onclick="abrirTopico('ref')">
+            <div>
+              <span class="badge" style="background:#152b22; color:var(--accent-green); border-color:#21523f;">Fontes</span>
+              <h3>Referências Científicas</h3>
+              <p>Literatura de apoio completa em conformidade com as normas ABNT.</p>
+            </div>
+            <span class="link-acao" style="color:var(--accent-green)">Consultar bibliografia →</span>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="calc-container" id="ferramenta-foco">
+        <h2 class="section-title">Calculadora de Custo Cognitivo</h2>
+        <p class="section-subtitle">Estime a perda potencial de atenção contínua baseada no seu padrão diário de uso.</p>
+        
+        <div class="calc-grid">
+          <div>
+            <div class="calc-input-group">
+              <label>Horas diárias em dispositivos: <span id="lbl-horas" class="calc-val">5h</span></label>
+              <input type="range" id="input-horas" min="1" max="12" value="5" oninput="calcularFoco()">
+            </div>
+            <div class="calc-input-group">
+              <label>Notificações/interrupções estimadas por hora: <span id="lbl-notif" class="calc-val">10</span></label>
+              <input type="range" id="input-notif" min="0" max="40" value="10" oninput="calcularFoco()">
+            </div>
+          </div>
+
+          <div class="calc-result-box">
+            <div style="font-size:0.8rem; color:var(--text-sub); text-transform:uppercase;">Índice de Fragmentação da Atenção</div>
+            <div id="calc-score" class="calc-score">Moderado</div>
+            <div id="calc-desc" style="font-size:0.85rem; color:var(--text-sub); margin-top:8px;">Seu cérebro gasta energia considerável alternando entre o foco principal e as notificações.</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <section id="view-detalhe" class="view-detalhe">
+      <button class="botao-voltar" onclick="voltarAoMenu()">← Voltar aos Módulos</button>
+      
+      <article class="card-conteudo">
+        <div class="header-topico">
+          <span class="tag-num" id="detalhe-num">Tópico</span>
+          <h2 id="detalhe-titulo">Título</h2>
+        </div>
+
+        <div class="texto" id="detalhe-texto"></div>
+
+        <div class="area-imagem" id="detalhe-imagem-container"></div>
+        <div class="legenda-imagem" id="detalhe-legenda"></div>
+
+        <div class="fonte-citacao" id="detalhe-fonte"></div>
+      </article>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>Murilo Antônio Corrêa Fernandes — Técnico em Informática Integrado ao Ensino Médio</p>
+    <p>E. E. E. M. Profª. Maria Rocha — 2026</p>
+  </footer>
+
+  <script>
+    const dadosTopicos = {
+      '2.1': {
+        num: 'Tópico 2.1',
+        titulo: 'Estímulos Digitais e Dopamina',
+        texto: `<p>O cérebro humano foi moldado ao longo da evolução para buscar novidades e recompensas como forma de sobrevivência. A responsável por nos mover nessa direção é a <strong>dopamina</strong>, um neurotransmissor focado na motivação e no desejo de conseguir algo prazeroso.</p>
+                <p>As redes sociais e plataformas digitais exploram esse mecanismo biológico ao utilizar notificações surpresa, curtidas e conteúdos infinitos (como o <em>infinite scroll</em>). Como você nunca sabe exatamente quando virá algo interessante, seu cérebro fica em constante expectativa.</p>
+                <p>Essa chuva diária de estímulos gera picos rápidos de dopamina. Para compensar esse excesso, o cérebro reduz seus receptores naturais, criando tolerância. O resultado é a necessidade de passar cada vez mais tempo de tela para sentir a mesma satisfação, gerando tédio e ansiedade no momento em que você larga o celular.</p>`,
+        imagemSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 350" width="100%">
+                      <rect width="800" height="350" fill="#080a14" rx="10"/>
+                      <text x="400" y="40" fill="#7fa8ff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">DINÂMICA DA BALANÇA DOPAMINÉRGICA</text>
+                      <line x1="70" y1="200" x2="640" y2="200" stroke="#1e2448" stroke-width="2" stroke-dasharray="6 4"/>
+                      <text x="650" y="204" fill="#9aa0c7" font-family="sans-serif" font-size="11" text-anchor="start">Linha de Base</text>
+                      <g>
+                        <text x="180" y="105" fill="#7fa8ff" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Nível Basal</text>
+                        <rect x="150" y="120" width="60" height="80" rx="6" fill="#7fa8ff" opacity="0.8"/>
+                        <text x="180" y="235" fill="#e8eaf6" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">1. Estado Normal</text>
+                        <text x="180" y="255" fill="#9aa0c7" font-family="sans-serif" font-size="11" text-anchor="middle">Homeostase / Equilíbrio</text>
+                      </g>
+                      <g>
+                        <text x="390" y="65" fill="#00f2fe" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Pico Dopaminérgico</text>
+                        <rect x="360" y="80" width="60" height="120" rx="6" fill="#00f2fe"/>
+                        <text x="390" y="235" fill="#e8eaf6" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">2. Estímulo Digital</text>
+                        <text x="390" y="255" fill="#9aa0c7" font-family="sans-serif" font-size="11" text-anchor="middle">Notificação / Recompensa</text>
+                      </g>
+                      <g>
+                        <rect x="570" y="200" width="60" height="45" rx="6" fill="#ff6fa8"/>
+                        <text x="600" y="265" fill="#ff6fa8" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Déficit de Dopamina</text>
+                        <text x="600" y="295" fill="#e8eaf6" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">3. Queda Pós-Uso</text>
+                        <text x="600" y="315" fill="#9aa0c7" font-family="sans-serif" font-size="11" text-anchor="middle">Tédio e busca por novo estímulo</text>
+                      </g>
+                    </svg>`,
+        legenda: 'Figura 1: A balança dopaminérgica — do estado de equilíbrio ao pico e ao déficit pós-estímulo.',
+        fonte: 'LEMBKE, 2021 · HANSEN, 2024 · KANDEL et al., 2021'
+      },
+      '2.2': {
+        num: 'Tópico 2.2',
+        titulo: 'Atenção Fragmentada e Multitarefa Digital',
+        texto: `<p>Muitas pessoas acreditam que conseguem ser "multitarefa" e fazer várias coisas ao mesmo tempo. A neurociência mostra que isso é um mito: o cérebro não processa duas tarefas complexas simultaneamente, ele apenas alterna rapidamente o foco entre uma e outra (o chamado <em>task-switching</em>).</p>
+                <p>Essa alternância constante consome muita energia do córtex pré-frontal. Quando você está estudando ou trabalhando e para por alguns segundos para olhar uma mensagem ou notificação, o cérebro não volta ao foco imediatamente.</p>
+                <p>Estudos indicam que leva de 15 a 20 minutos de atenção contínua para atingir o estado de foco profundo (conhecido como <em>Flow</em>). Quando nos acostumamos com interrupções a todo momento, desenvolvemos uma "atenção parcial contínua", tornando o raciocínio mais superficial e aumentando bastante a taxa de erros.</p>`,
+        imagemSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" width="100%">
+                      <rect width="800" height="280" fill="#080a14" rx="10"/>
+                      <text x="400" y="38" fill="#7fa8ff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">CURVA DE PROFUNDIDADE DA ATENÇÃO (EFEITO INTERRUPÇÃO)</text>
+                      <line x1="80" y1="220" x2="720" y2="220" stroke="#1e2448" stroke-width="2"/>
+                      <line x1="80" y1="70" x2="80" y2="220" stroke="#1e2448" stroke-width="2"/>
+                      <text x="75" y="90" fill="#7fe0c4" font-family="sans-serif" font-size="10" text-anchor="end">Foco Máximo (Flow)</text>
+                      <text x="75" y="215" fill="#ff6fa8" font-family="sans-serif" font-size="10" text-anchor="end">Superficial</text>
+                      <path d="M 80 200 C 180 200, 250 90, 380 90 L 720 90" stroke="#7fe0c4" stroke-width="3" stroke-dasharray="6 4" fill="none"/>
+                      <text x="600" y="80" fill="#7fe0c4" font-family="sans-serif" font-size="11" font-weight="bold">Sem interrupção (Estado de Flow)</text>
+                      <path d="M 80 200 L 150 140 L 155 210 L 250 130 L 255 210 L 370 120 L 375 210 L 500 130 L 505 210 L 640 120" stroke="#ff6fa8" stroke-width="3" fill="none"/>
+                      <circle cx="155" cy="210" r="5" fill="#ff6fa8"/>
+                      <circle cx="255" cy="210" r="5" fill="#ff6fa8"/>
+                      <circle cx="375" cy="210" r="5" fill="#ff6fa8"/>
+                      <circle cx="505" cy="210" r="5" fill="#ff6fa8"/>
+                      <text x="400" y="255" fill="#9aa0c7" font-family="sans-serif" font-size="11" text-anchor="middle">O foco leva de 10 a 15 min para engajar; atingir o Estado de Flow requer até 20 min de atenção contínua</text>
+                    </svg>`,
+        legenda: 'Figura 2: A curva de profundidade da atenção — a diferença entre o engajamento contínuo até o Estado de Flow e a fragmentação por interrupções.',
+        fonte: 'CARR, 2011 · OPHIR, NASS & WAGNER, 2009'
+      },
+      '2.3': {
+        num: 'Tópico 2.3',
+        titulo: 'Impactos na Memória e na Leitura Profunda',
+        texto: `<p>A forma como lemos no ambiente digital mudou o modo como nosso cérebro processa informações. Em vez de ler de forma contínua da esquerda para a direita, em telas acostumamos a fazer uma leitura rápida e dinâmica em busca de palavras-chave (chamada de <em>skimming</em>).</p>
+                <p>Esse hábito enfraquece os circuitos neurais da leitura profunda, reduzindo a capacidade de interpretação de texto, o pensamento crítico e até a empatia.</p>
+                <p>Além disso, o acesso imediato ao Google e a assistentes virtuais criou o fenômeno da <strong>Amnésia Digital</strong> (ou Efeito Google): como o cérebro sabe que a informação está salva na internet, ele prefere memorizar <em>onde encontrar</em> o dado em vez de guardar o conteúdo na memória de longo prazo.</p>`,
+        imagemSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="100%">
+                      <rect width="800" height="300" fill="#080a14" rx="10"/>
+                      <text x="400" y="38" fill="#7fa8ff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">FUNIL DE CONSOLIDAÇÃO DA MEMÓRIA</text>
+                      <g transform="translate(70, 60)">
+                        <rect x="0" y="0" width="310" height="210" rx="10" fill="#101428" stroke="#00f2fe" stroke-width="1.5"/>
+                        <text x="155" y="30" fill="#00f2fe" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">LEITURA LINEAR (IMPRESSO)</text>
+                        <path d="M 60 55 L 250 55 L 180 110 L 180 150 L 130 150 L 130 110 Z" fill="#182246" stroke="#00f2fe" stroke-width="1.5"/>
+                        <circle cx="155" cy="75" r="5" fill="#00f2fe"/>
+                        <circle cx="130" cy="85" r="5" fill="#7fe0c4"/>
+                        <circle cx="180" cy="85" r="5" fill="#00f2fe"/>
+                        <circle cx="155" cy="130" r="6" fill="#7fe0c4"/>
+                        <text x="155" y="180" fill="#7fe0c4" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Entrada na Memória de Longo Prazo</text>
+                        <text x="155" y="195" fill="#9aa0c7" font-family="sans-serif" font-size="10" text-anchor="middle">Retenção e consolidação profunda</text>
+                      </g>
+                      <g transform="translate(420, 60)">
+                        <rect x="0" y="0" width="310" height="210" rx="10" fill="#101428" stroke="#ff6fa8" stroke-width="1.5"/>
+                        <text x="155" y="30" fill="#ff6fa8" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">VARREDURA RÁPIDA (DIGITAL)</text>
+                        <path d="M 60 55 L 250 55 L 180 110 L 180 150 L 130 150 L 130 110 Z" fill="#281628" stroke="#ff6fa8" stroke-width="1.5"/>
+                        <circle cx="155" cy="75" r="5" fill="#ff6fa8"/>
+                        <circle cx="40" cy="80" r="4" fill="#ff6fa8" opacity="0.5"/>
+                        <circle cx="270" cy="85" r="4" fill="#ff6fa8" opacity="0.5"/>
+                        <circle cx="20" cy="105" r="3" fill="#ff6fa8" opacity="0.3"/>
+                        <text x="155" y="180" fill="#ff6fa8" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Descarte da Memória de Trabalho</text>
+                        <text x="155" y="195" fill="#9aa0c7" font-family="sans-serif" font-size="10" text-anchor="middle">Amnésia Digital / Efeito Google</text>
+                      </g>
+                    </svg>`,
+        legenda: 'Figura 3: O funil de consolidação da memória — a diferença no fluxo de retenção entre a leitura linear e a varredura digital.',
+        fonte: 'SPARROW et al., 2011 · WOLF, 2021 · CARR, 2011 · DESMURGET, 2021'
+      },
+      '2.4': {
+        num: 'Tópico 2.4',
+        titulo: 'Sono, Ritmo Circadiano e Luz Azul',
+        texto: `<p>O uso de celulares, tablets e notebooks durante a noite prejudica diretamente a qualidade do sono. A luz emitida pelas telas contém um comprimento de onda azul que simula a luz solar do meio-dia.</p>
+                <p>Quando essa luz atinge nossos olhos à noite, ela engana a glândula pineal no cérebro, bloqueando a produção de <strong>melatonina</strong> — o hormônio responsável por sinalizar ao corpo que é hora de dormir.</p>
+                <p>Sem a quantidade certa de melatonina, demoramos mais para pegar no sono e perdemos fases cruciais de sono profundo. É justamente durante o sono profundo que o cérebro organiza as memórias do dia e limpa resíduos metabólicos. O resultado do uso noturno de telas é um cansaço constante, déficit de atenção e menor rendimento escolar no dia seguinte.</p>`,
+        imagemSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" width="100%">
+                      <rect width="800" height="280" fill="#080a14" rx="10"/>
+                      <text x="400" y="38" fill="#7fa8ff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">O ENGANO DO RELÓGIO BIOLÓGICO</text>
+                      <g transform="translate(60, 60)">
+                        <rect x="0" y="0" width="320" height="185" rx="10" fill="#101428" stroke="#00f2fe" stroke-width="1.5"/>
+                        <text x="160" y="28" fill="#00f2fe" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">SINAL NATURAL (23:00)</text>
+                        <path d="M 150 50 A 20 20 0 1 0 175 80 A 15 15 0 1 1 150 50 Z" fill="#ffb86b"/>
+                        <text x="160" y="115" fill="#e8eaf6" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Sinal: "É hora de descansar"</text>
+                        <text x="160" y="140" fill="#7fe0c4" font-family="sans-serif" font-size="10" text-anchor="middle">✓ Libera hormônio do sono (Melatonina)</text>
+                        <text x="160" y="158" fill="#7fe0c4" font-family="sans-serif" font-size="10" text-anchor="middle">✓ Organiza as memórias do dia</text>
+                      </g>
+                      <g transform="translate(420, 60)">
+                        <rect x="0" y="0" width="320" height="185" rx="10" fill="#101428" stroke="#ff6fa8" stroke-width="1.5"/>
+                        <text x="160" y="28" fill="#ff6fa8" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">SINAL COM CELULAR (23:00)</text>
+                        <circle cx="160" cy="65" r="18" fill="#00f2fe"/>
+                        <line x1="160" y1="40" x2="160" y2="32" stroke="#00f2fe" stroke-width="2"/>
+                        <line x1="160" y1="90" x2="160" y2="98" stroke="#00f2fe" stroke-width="2"/>
+                        <line x1="135" y1="65" x2="127" y2="65" stroke="#00f2fe" stroke-width="2"/>
+                        <line x1="185" y1="65" x2="193" y2="65" stroke="#00f2fe" stroke-width="2"/>
+                        <text x="160" y="115" fill="#e8eaf6" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Sinal Falso: "Ainda é dia!"</text>
+                        <text x="160" y="140" fill="#ff6fa8" font-family="sans-serif" font-size="10" text-anchor="middle">✕ Bloqueia o sono por até 2 horas</text>
+                        <text x="160" y="158" fill="#ff6fa8" font-family="sans-serif" font-size="10" text-anchor="middle">✕ Acorda cansado e sem foco</text>
+                      </g>
+                    </svg>`,
+        legenda: 'Figura 4: O engano do relógio biológico — a diferença entre o sinal natural de descanso e o sinal falso gerado pela luz azul.',
+        fonte: 'BEAR et al., 2020 · CHANG et al., 2015 · HAIDT, 2024'
+      },
+      '2.5': {
+        num: 'Tópico 2.5',
+        titulo: 'Tecnoestresse e Saúde Mental',
+        texto: `<p>O tecnoestresse ocorre quando o uso contínuo da tecnologia ultrapassa nossos limites biológicos e emocionais. Ele se manifesta principalmente pela sensação de sobrecarga de informações e pela obrigação silenciosa de estar sempre disponível e respondendo rapidamente.</p>
+                <p>Acompanhado a isso vem o fenômeno do <strong>FOMO</strong> (<em>Fear Of Missing Out</em>, ou Medo de Estar Perdendo Algo). O receio de ficar de fora das novidades nas redes sociais cria um estado involuntário de hipervigilância.</p>
+                <p>Toda vez que o celular toca ou vibra, o cérebro interpreta como um aviso que exige ação imediata. Isso ativa o sistema nervoso simpático e eleva os níveis de <strong>cortisol</strong> (o hormônio do estresse), gerando ansiedade crônica, desgaste mental e dificuldade de relaxar.</p>`,
+        imagemSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 290" width="100%">
+                      <rect width="800" height="290" fill="#080a14" rx="10"/>
+                      <text x="400" y="38" fill="#7fa8ff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">O CICLO VICIOSO DO TECNOESTRESSE (FOMO)</text>
+                      <g transform="translate(100, 75)">
+                        <rect x="0" y="0" width="160" height="60" rx="8" fill="#101428" stroke="#00f2fe" stroke-width="1.5"/>
+                        <text x="80" y="28" fill="#00f2fe" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">1. Alerta / Notificação</text>
+                        <text x="80" y="45" fill="#9aa0c7" font-family="sans-serif" font-size="9" text-anchor="middle">Estímulo sonoro / visual</text>
+                      </g>
+                      <path d="M 260 105 L 340 105" stroke="#7fa8ff" stroke-width="2" fill="none"/>
+                      <g transform="translate(340, 75)">
+                        <rect x="0" y="0" width="160" height="60" rx="8" fill="#101428" stroke="#ffb86b" stroke-width="1.5"/>
+                        <text x="80" y="28" fill="#ffb86b" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">2. Checagem Involuntária</text>
+                        <text x="80" y="45" fill="#9aa0c7" font-family="sans-serif" font-size="9" text-anchor="middle">Interrupção da tarefa</text>
+                      </g>
+                      <path d="M 500 105 L 580 105" stroke="#7fa8ff" stroke-width="2" fill="none"/>
+                      <g transform="translate(580, 75)">
+                        <rect x="0" y="0" width="160" height="60" rx="8" fill="#101428" stroke="#ff6fa8" stroke-width="1.5"/>
+                        <text x="80" y="28" fill="#ff6fa8" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">3. Elevação de Cortisol</text>
+                        <text x="80" y="45" fill="#9aa0c7" font-family="sans-serif" font-size="9" text-anchor="middle">Estado de alerta biológico</text>
+                      </g>
+                      <path d="M 660 135 C 660 210, 180 210, 180 135" stroke="#ff6fa8" stroke-width="2" stroke-dasharray="4 4" fill="none"/>
+                      <text x="420" y="252" fill="#ff6fa8" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Loop Contínuo de Ansiedade por Desconexão</text>
+                    </svg>`,
+        legenda: 'Figura 5: O ciclo vicioso do tecnoestresse — da notificação até a checagem impulsiva e o aumento do cortisol.',
+        fonte: 'PRZYBYLSKI et al., 2013 · HAIDT, 2024'
+      },
+      '2.6': {
+        num: 'Tópico 2.6',
+        titulo: 'Uso Consciente & Método C.O.D.E.',
+        texto: `<p>A tecnologia em si não é uma vilã. Quando usada de forma intencional, ela pode funcionar como uma extensão muito poderosa das nossas capacidades intelectuais.</p>
+                <p>O conceito do <strong>Segundo Cérebro</strong> sugere a criação de um sistema digital organized onde armazenamos anotações, referências e projetos. Isso libera o cérebro biológico da obrigação de guardar tudo, permitindo que ele trabalhe como um processador focado em pensar e criar.</p>
+                <p>Para aplicar isso no dia a dia, utiliza-se a metodologia <strong>C.O.D.E.</strong>, dividida em quatro etapas simples:</p>
+                <ul>
+                  <li><strong>C (Capturar):</strong> Guardar apenas as informações e ideias que realmente importam.</li>
+                  <li><strong>O (Organizar):</strong> Estruturar as notas pensando em projetos práticos do futuro.</li>
+                  <li><strong>D (Destilar):</strong> Fazer resumos breves para encontrar o ponto principal rapidamente.</li>
+                  <li><strong>E (Expressar):</strong> Usar todo o conhecimento acumulado para criar trabalhos, projetos e soluções reais.</li>
+                </ul>`,
+        imagemSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" width="100%">
+                      <defs>
+                        <radialGradient id="bgComp" cx="50%" cy="50%" r="75%">
+                          <stop offset="0%" stop-color="#12172e" />
+                          <stop offset="100%" stop-color="#080a14" />
+                        </radialGradient>
+                      </defs>
+                      <rect width="800" height="360" fill="url(#bgComp)" rx="12" />
+                      <text x="400" y="38" fill="#ffffff" font-family="sans-serif" font-size="15" font-weight="bold" text-anchor="middle">A DIVISÃO PERFEITA DO TRABALHO MENTAL</text>
+                      <g transform="translate(60, 70)">
+                        <rect x="0" y="0" width="310" height="230" rx="12" fill="#101428" stroke="#00f2fe" stroke-width="2" />
+                        <text x="155" y="32" fill="#00f2fe" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">CÉREBRO BIOLÓGICO</text>
+                        <text x="155" y="52" fill="#7fa8ff" font-family="sans-serif" font-size="11" text-anchor="middle">O Processador (CPU)</text>
+                        <line x1="30" y1="68" x2="280" y2="68" stroke="#1e2448" stroke-width="1.5" />
+                        <text x="155" y="100" fill="#e8eaf6" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Ideal para:</text>
+                        <text x="155" y="128" fill="#9aa0c7" font-family="sans-serif" font-size="11" text-anchor="middle">🧠 Ter novas ideias e insights</text>
+                        <text x="155" y="153" fill="#9aa0c7" font-family="sans-serif" font-size="11" text-anchor="middle">💡 Resolver problemas complexos</text>
+                        <text x="155" y="178" fill="#9aa0c7" font-family="sans-serif" font-size="11" text-anchor="middle">🎨 Criar, conectar e ter empatia</text>
+                        <text x="155" y="212" fill="#ff6fa8" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle">Péssimo para: Armazenar dados brutos</text>
+                      </g>
+                      <circle cx="400" cy="185" r="22" fill="#181c38" stroke="#ffffff" stroke-width="2" />
+                      <text x="400" y="192" fill="#ffffff" font-family="sans-serif" font-size="22" font-weight="bold" text-anchor="middle">+</text>
+                      <g transform="translate(430, 70)">
+                        <rect x="0" y="0" width="310" height="230" rx="12" fill="#101428" stroke="#7fe0c4" stroke-width="2" />
+                        <text x="155" y="32" fill="#7fe0c4" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle">SEGUNDO CÉREBRO</text>
+                        <text x="155" y="52" fill="#7fe0c4" font-family="sans-serif" font-size="11" text-anchor="middle">O Disco Rígido (HD Digital)</text>
+                        <line x1="30" y1="68" x2="280" y2="68" stroke="#1e2448" stroke-width="1.5" />
+                        <text x="155" y="100" fill="#e8eaf6" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">Ideal para:</text>
+                        <text x="155" y="128" fill="#9aa0c7" font-family="sans-serif" font-size="11" text-anchor="middle">📁 Lembrar detalhes, links e notas</text>
+                        <text x="155" y="153" fill="#9aa0c7" font-family="sans-serif" font-size="11" text-anchor="middle">🗂 Organizar projetos do futuro</text>
+                        <text x="155" y="178" fill="#9aa0c7" font-family="sans-serif" font-size="11" text-anchor="middle">🔍 Acessar informação em segundos</text>
+                        <text x="155" y="212" fill="#7fe0c4" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle">Resultado: Mente livre e sem ansiedade</text>
+                      </g>
+                      <text x="400" y="335" fill="#7fa8ff" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Combinação: Menos estresse mental + Maior capacidade de criação</text>
+                    </svg>`,
+        legenda: 'Figura 6: A divisão do trabalho mental — o cérebro biológico como processador e o segundo cérebro como repositório digital.',
+        fonte: 'FORTE, 2022 · ALLEN, 2015 · LÉVY, 1999'
+      },
+      '2.7': {
+        num: 'Dados & Estatísticas',
+        titulo: 'Tempo de Tela: Recomendação vs. Realidade',
+        texto: `<p>Organizações de saúde em todo o mundo, como a Organização Mundial da Saúde (OMS) e a Sociedade Brasileira de Pediatria (SBP), estabelecem limites claros para o uso seguro de dispositivos eletrônicos.</p>
+                <p>A diretriz médica recomenda que jovens com mais de 12 anos passem no máximo <strong>2 horas por dia em frente às telas</strong> fora das atividades escolares, o que representa aproximadamente 12,5% do tempo em que permanecem acordados.</p>
+                <p>No entanto, levantamentos populacionais revelam um cenário preocupante: a média real entre estudantes do Ensino Médio ultrapassa <strong>7,5 horas diárias de tela</strong>. Isso significa que quase metade (47%) de todo o tempo desperto de um jovem é gasto interagindo com redes sociais, vídeos e jogos virtuais, ultrapassando o tempo dedicado à própria escola e ao sono.</p>`,
+        imagemSvg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="100%">
+                      <rect width="800" height="300" fill="#080a14" rx="12"/>
+                      <text x="400" y="38" fill="#7fa8ff" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle">PORCENTAGEM DO TEMPO ACORDADO DEDICADO ÀS TELAS</text>
+                      <g transform="translate(60, 65)">
+                        <rect x="0" y="0" width="320" height="180" rx="10" fill="#101428" stroke="#7fe0c4" stroke-width="1.5"/>
+                        <text x="160" y="30" fill="#7fe0c4" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">RECOMENDAÇÃO MÉDICA (OMS / SBP)</text>
+                        <rect x="30" y="65" width="260" height="24" rx="12" fill="#080a14"/>
+                        <rect x="30" y="65" width="32" height="24" rx="12" fill="#7fe0c4"/>
+                        <text x="160" y="120" fill="#e8eaf6" font-family="sans-serif" font-size="22" font-weight="bold" text-anchor="middle">2 horas / dia</text>
+                        <text x="160" y="145" fill="#7fe0c4" font-family="sans-serif" font-size="11" text-anchor="middle">✓ Apenas 12,5% das horas acordadas</text>
+                      </g>
+                      <g transform="translate(420, 65)">
+                        <rect x="0" y="0" width="320" height="180" rx="10" fill="#101428" stroke="#ff6fa8" stroke-width="1.5"/>
+                        <text x="160" y="30" fill="#ff6fa8" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">MÉDIA REAL NO ENSINO MÉDIO</text>
+                        <rect x="30" y="65" width="260" height="24" rx="12" fill="#080a14"/>
+                        <rect x="30" y="65" width="122" height="24" rx="12" fill="#ff6fa8"/>
+                        <text x="160" y="120" fill="#e8eaf6" font-family="sans-serif" font-size="22" font-weight="bold" text-anchor="middle">7,5 horas / dia</text>
+                        <text x="160" y="145" fill="#ff6fa8" font-family="sans-serif" font-size="11" text-anchor="middle">✕ 47% das horas acordadas consumidas</text>
+                      </g>
+                      <text x="400" y="275" fill="#9aa0c7" font-family="sans-serif" font-size="10" text-anchor="middle">Um jovem passa quase metade do seu tempo desperto interagindo com telas eletrônicas.</text>
+                    </svg>`,
+        legenda: 'Figura 7: Comparativo percentual entre o tempo limite recomendado de telas e a média real de exposição diária.',
+        fonte: 'OMS, 2020 · SBP, 2020 · CETIC.BR, 2024'
+      },
+      'ref': {
+        num: 'Fundamentação Teórica',
+        titulo: 'Referências Bibliográficas (Norma ABNT)',
+        texto: `<ul style="list-style: none; padding: 0;">
+                  <li style="border-bottom: 1px solid #1e2448; padding: 12px 0; color: #9aa0c7;">
+                    <strong style="color: #fff; display: block;">ALLEN, David.</strong>
+                    <em>A arte de fazer acontecer: o método GTD (Getting Things Done)</em>. Rio de Janeiro: Sextante, 2015.
+                  </li>
+                  <li style="border-bottom: 1px solid #1e2448; padding: 12px 0; color: #9aa0c7;">
+                    <strong style="color: #fff; display: block;">BEAR, Mark F.; CONNORS, Barry W.; PARADISO, Michael A.</strong>
+                    <em>Neurociências: desvendando o sistema nervoso</em>. 4. ed. Porto Alegre: Artmed, 2020.
+                  </li>
+                  <li style="border-bottom: 1px solid #1e2448; padding: 12px 0; color: #9aa0c7;">
+                    <strong style="color: #fff; display: block;">CARR, Nicholas.</strong>
+                    <em>A geração superficial: o que a internet está fazendo com os nossos cérebros</em>. Rio de Janeiro: Agir, 2011.
+                  </li>
+                  <li style="border-bottom: 1px solid #1e2448; padding: 12px 0; color: #9aa0c7;">
+                    <strong style="color: #fff; display: block;">CETIC.BR.</strong>
+                    <em>Pesquisa sobre o uso das tecnologias de informação e comunicação nas escolas brasileiras: TIC Kids Online Brasil</em>. São Paulo: Comitê Gestor da Internet no Brasil, 2024.
+                  </li>
+                  <li style="border-bottom: 1px solid #1e2448; padding: 12px 0; color: #9aa0c7;">
+                    <strong style="color: #fff; display: block;">CHANG, Anne-Marie et al.</strong>
+                    Evening use of light-emitting eReaders negatively affects sleep, circadian timing, and next-morning alertness. <em>Proceedings of the National Academy of Sciences (PNAS)</em>, v. 112, n. 4, p. 1232-1237, 2015.
+                  </li>
+                  <li style="border-bottom: 1px solid #1e2448; padding: 12px 0; color: #9aa0c7;">
+                    <strong style="color: #fff; display: block;">DESMURGET, Michel.</strong>
+                    <em>A fábrica de cretinos digitais: os perigos das telas para nossas crianças</em>. São Paulo: Vestígio, 2021.
+                  </li>
+                  <li style="border-bottom: 1px solid #1e2448; padding: 12px 0; color: #9aa0c7;">
+                    <strong style="color: #fff; display: block;">FORTE, Tiago.</strong>
+                    <em>Criando um Segundo Cérebro: um método comprovado para organizar sua vida digital</em>. Rio de Janeiro: Sextante, 2022.
+                  </li>
+                  <li style="border-bottom: 1px solid #1e2448; padding: 12px 0; color: #9aa0c7;">
+                    <strong style="color: #fff; display: block;">HAIDT, Jonathan.</strong>
+                    <em>A geração ansiosa: como a infância hiperconectada está causando uma epidemia de transtornos mentais</em>. Rio de Janeiro: Companhia das Letras, 2024.
+                  </li>
+                  <li style="border-bottom: 1px solid #1e2448; padding: 12px 0; color: #9aa0c7;">
+                    <strong style="color: #fff; display: block;">HANSEN, Anders.</strong>
+                    <em>Cérebro digital: como acalmar a sua mente num mundo de hiperconexão</em>. Lisboa: Relógio D'Água, 2024.
+                  </li>
+                  <li style="border-bottom: 1px solid #1e2448; padding: 12px 0; color: #9aa0c7;">
+                    <strong style="color: #fff; display: block;">KANDEL, Eric R. et al.</strong>
+                    <em>Princípios de neurociências</em>. 6. ed. Porto Alegre: AMGH, 2021.
+                  </li>
+                  <li style="border-bottom: 1px solid #1e2448; padding: 12px 0; color: #9aa0c7;">
+                    <strong style="color: #fff; display: block;">LEMBKE, Anna.</strong>
+                    <em>Nação dopamina: por que a busca por prazer gera mais dor e o que fazer para mudar</em>. Rio de Janeiro: Vestígio, 2021.
+                  </li>
+                  <li style="border-bottom: 1px solid #1e2448; padding: 12px 0; color: #9aa0c7;">
+                    <strong style="color: #fff; display: block;">LÉVY, Pierre.</strong>
+                    <em>Cibercultura</em>. São Paulo: Editora 34, 1999.
+                  </li>
+                  <li style="border-bottom: 1px solid #1e2448; padding: 12px 0; color: #9aa0c7;">
+                    <strong style="color: #fff; display: block;">OPHIR, Eyal; NASS, Clifford; WAGNER, Anthony D.</strong>
+                    Cognitive control in media multitaskers. <em>Proceedings of the National Academy of Sciences (PNAS)</em>, v. 106, n. 37, p. 15583-15587, 2009.
+                  </li>
+                  <li style="border-bottom: 1px solid #1e2448; padding: 12px 0; color: #9aa0c7;">
+                    <strong style="color: #fff; display: block;">ORGANIZAÇÃO MUNDIAL DA SAÚDE (OMS).</strong>
+                    <em>Diretrizes sobre atividade física, comportamento sedentário e sono para crianças e adolescentes</em>. Genebra: OMS, 2020.
+                  </li>
+                  <li style="border-bottom: 1px solid #1e2448; padding: 12px 0; color: #9aa0c7;">
+                    <strong style="color: #fff; display: block;">PRZYBYLSKI, Andrew K. et al.</strong>
+                    Motivational, emotional, and behavioral correlates of fear of missing out. <em>Computers in Human Behavior</em>, v. 29, n. 4, p. 1841-1848, 2013.
+                  </li>
+                  <li style="border-bottom: 1px solid #1e2448; padding: 12px 0; color: #9aa0c7;">
+                    <strong style="color: #fff; display: block;">SOCIEDADE BRASILEIRA DE PEDIATRIA (SBP).</strong>
+                    <em>Manual de Orientação: Menos Telas, Mais Saúde</em>. Departamento Científico de Adolescência. Rio de Janeiro: SBP, 2020.
+                  </li>
+                  <li style="border-bottom: 1px solid #1e2448; padding: 12px 0; color: #9aa0c7;">
+                    <strong style="color: #fff; display: block;">SPARROW, Betsy; LIU, Jenny; WEGNER, Daniel M.</strong>
+                    Google Effects on Memory: Cognitive Consequences of Having Information at Our Fingertips. <em>Science</em>, v. 333, n. 6043, p. 776-778, 2011.
+                  </li>
+                  <li style="border-bottom: 1px solid #1e2448; padding: 12px 0; color: #9aa0c7;">
+                    <strong style="color: #fff; display: block;">WOLF, Maryanne.</strong>
+                    <em>O cérebro no mundo digital: os desafios da leitura na nossa era</em>. São Paulo: Contexto, 2021.
+                  </li>
+                </ul>`,
+        imagemSvg: '',
+        legenda: '',
+        fonte: ''
+      }
+    };
+
+    function abrirTopico(id) {
+      const topico = dadosTopicos[id];
+      if (!topico) return;
+
+      document.getElementById('detalhe-num').textContent = topico.num;
+      document.getElementById('detalhe-titulo').textContent = topico.titulo;
+      document.getElementById('detalhe-texto').innerHTML = topico.texto;
+      
+      const imgContainer = document.getElementById('detalhe-imagem-container');
+      const legendaEl = document.getElementById('detalhe-legenda');
+      const fonteEl = document.getElementById('detalhe-fonte');
+
+      if (topico.imagemSvg) {
+        imgContainer.innerHTML = topico.imagemSvg;
+        imgContainer.style.display = 'block';
+      } else {
+        imgContainer.innerHTML = '';
+        imgContainer.style.display = 'none';
+      }
+
+      legendaEl.textContent = topico.legenda || '';
+      fonteEl.textContent = topico.fonte ? 'Fonte: ' + topico.fonte : '';
+
+      document.getElementById('view-grid').style.display = 'none';
+      const viewDetalhe = document.getElementById('view-detalhe');
+      viewDetalhe.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function voltarAoMenu() {
+      document.getElementById('view-detalhe').style.display = 'none';
+      document.getElementById('view-grid').style.display = 'block';
+    }
+
+    function responderQuiz(nivel) {
+      const res = document.getElementById('quiz-resultado');
+      res.style.display = 'block';
+      
+      if (nivel === 'baixo') {
+        res.innerHTML = `💡 <strong>Indicação de Leitura:</strong> Tópico 2.6 (Uso Consciente & Método C.O.D.E.).`;
+      } else if (nivel === 'medio') {
+        res.innerHTML = `💡 <strong>Indicação de Leitura:</strong> Tópico 2.1 (Estímulos Digitais & Dopamina) e Tópico 2.2 (Atenção Fragmentada & Multitarefa).`;
+      } else {
+        res.innerHTML = `💡 <strong>Indicação de Leitura:</strong> Tópico 2.1 (Estímulos Digitais & Dopamina), Tópico 2.2 (Atenção Fragmentada & Multitarefa) e Tópico 2.5 (Tecnoestresse & Cortisol).`;
+      }
+    }
+
+    function calcularFoco() {
+      const horas = parseInt(document.getElementById('input-horas').value);
+      const notif = parseInt(document.getElementById('input-notif').value);
+      
+      document.getElementById('lbl-horas').textContent = horas + 'h';
+      document.getElementById('lbl-notif').textContent = notif;
+
+      const scoreEl = document.getElementById('calc-score');
+      const descEl = document.getElementById('calc-desc');
+
+      const impacto = horas * notif;
+
+      if (impacto < 30) {
+        scoreEl.textContent = "Baixo";
+        scoreEl.style.color = "var(--accent-green)";
+        descEl.textContent = "Sua atenção preserva boa continuidade ao longo do dia.";
+      } else if (impacto < 100) {
+        scoreEl.textContent = "Moderado";
+        scoreEl.style.color = "var(--accent-cyan)";
+        descEl.textContent = "Seu cérebro gasta energia considerável alternando entre o foco principal e as notificações.";
+      } else {
+        scoreEl.textContent = "Elevado";
+        scoreEl.style.color = "var(--accent-pink)";
+        descEl.textContent = "Atenção altamente fragmentada. Alto custo cognitivo e dificuldade em entrar em Estado de Flow.";
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', calcularFoco);
+  </script>
+</body>
+</html>
